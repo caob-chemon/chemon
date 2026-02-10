@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemon - Cierre Enero 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --navy: #2A2D64;
+            --navy-dark: #1a1d4d;
+            --cyan: #38B6FF;
+            --pink: #E91E63;
+            --gray: #F4F7F9;
+            --white: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .presentation-canvas {
+            width: 1280px;
+            height: 720px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            border-radius: 8px; /* Slight rounding for modern feel */
+        }
+
+        /* Tech Pattern Background */
+        .bg-pattern {
+            background-image: radial-gradient(var(--navy) 0.5px, transparent 0.5px), radial-gradient(var(--navy) 0.5px, var(--white) 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-color: #fdfdfd;
+        }
+
+        /* Decorative Shapes */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .deco-1 { width: 400px; height: 400px; background: var(--cyan); top: -100px; right: -100px; filter: blur(40px); }
+        .deco-2 { width: 300px; height: 300px; background: var(--pink); bottom: -50px; left: -50px; filter: blur(40px); }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px 80px;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); text-shadow: 0 0 0 rgba(233, 30, 99, 0); }
+            50% { transform: scale(1.02); text-shadow: 0 0 10px rgba(233, 30, 99, 0.5); }
+            100% { transform: scale(1); text-shadow: 0 0 0 rgba(233, 30, 99, 0); }
+        }
+
+        .critical-pulse {
+            display: inline-block;
+            animation: pulse-glow 2s infinite ease-in-out;
+            color: var(--pink);
+            font-weight: 800;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: -0.5px; }
+        h1 { font-size: 85px; color: var(--white); font-weight: 800; line-height: 0.9; }
+        
+        .slide-title { 
+            font-size: 42px; 
+            color: var(--navy); 
+            margin-bottom: 40px; 
+            position: relative;
+            padding-left: 30px;
+            font-weight: 800;
+        }
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 8px;
+            background: linear-gradient(to bottom, var(--cyan), var(--pink));
+            border-radius: 4px;
+        }
+
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; z-index: 2; position: relative; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; width: 100%; align-items: center; }
+        
+        /* Modern Backgrounds */
+        .bg-navy { 
+            background: radial-gradient(circle at top right, #343875, var(--navy) 60%, var(--navy-dark)); 
+            color: var(--white); 
+        }
+        .bg-gray { background-color: var(--gray); color: var(--navy); }
+
+        /* Enhanced Cards */
+        .card-modern {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(42, 45, 100, 0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(42, 45, 100, 0.12);
+        }
+        /* Top accent line */
+        .card-modern::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--cyan), var(--pink));
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 380px;
+            width: 100%;
+            border-bottom: 3px solid rgba(42, 45, 100, 0.2);
+            position: relative;
+            padding-bottom: 0;
+        }
+        .bar-wrap { display: flex; flex-direction: column; align-items: center; width: 14%; height: 100%; justify-content: flex-end; z-index: 2; }
+        .bar { 
+            width: 100%; 
+            background: linear-gradient(to bottom, var(--navy), var(--navy-dark)); 
+            border-radius: 8px 8px 0 0; 
+            position: relative;
+            box-shadow: 5px 0 10px rgba(0,0,0,0.1);
+        }
+        .bar.current { 
+            background: linear-gradient(to bottom, var(--cyan), #2998db); 
+            box-shadow: 0 0 20px rgba(56, 182, 255, 0.4);
+        }
+        .bar-label { margin-top: 20px; font-weight: 700; font-family: 'Montserrat'; font-size: 15px; color: var(--navy); }
+        
+        .goal-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            border-top: 2px dashed var(--pink);
+            bottom: 92%; 
+            z-index: 1;
+        }
+        .goal-text { 
+            position: absolute; right: 0; top: -30px; 
+            background: var(--pink); color: white; 
+            padding: 4px 12px; border-radius: 12px;
+            font-weight: bold; font-size: 13px; letter-spacing: 1px;
+        }
+
+        /* Stats Box */
+        .stat-box {
+            background: var(--white);
+            padding: 45px 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: 0.3s;
+        }
+        .stat-box:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .stat-box h3 { font-size: 80px; color: var(--navy); line-height: 1; margin-bottom: 10px; font-weight: 800; }
+
+        /* Navigation */
+        .nav-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        .btn-nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .bg-navy .btn-nav { border-color: rgba(255,255,255,0.5); color: white; }
+        .btn-nav:hover { background: var(--pink); border-color: var(--pink); color: white; transform: scale(1.1); }
+
+        .list-styled li { 
+            font-size: 19px; 
+            margin-bottom: 18px; 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 15px; 
+            line-height: 1.4; 
+            color: #444;
+        }
+        .list-styled li i { 
+            color: var(--cyan); 
+            margin-top: 3px; 
+            background: rgba(56, 182, 255, 0.1); 
+            padding: 8px; 
+            border-radius: 50%; 
+            font-size: 16px;
+        }
+        
+        .badge { background: var(--navy); color: white; padding: 6px 15px; border-radius: 30px; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;}
+        .badge-pink { background: var(--pink); box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3); }
+
+        /* Event Cards - Ticket Style */
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .event-header {
+            padding: 25px;
+            background: var(--gray);
+            border-bottom: 2px dashed #ddd;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .event-body { padding: 30px; flex-grow: 1; }
+        
+        /* Floating Icons for Titles */
+        .title-icon { font-size: 80px; position: absolute; right: 0; top: -20px; opacity: 0.1; color: var(--navy); }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-canvas" id="canvas">
+        
+        <!-- Slide 1: Portada -->
+        <div class="slide active bg-navy">
+            <!-- Decorative overlay -->
+            <div style="position: absolute; inset: 0; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.1;"></div>
+            <div class="deco-1" style="opacity: 0.2;"></div>
+            <div class="deco-2" style="opacity: 0.2;"></div>
+            
+            <div class="content-area" style="text-align: center; align-items: center;">
+                <img src="https://chemon.lat/web/image/website/1/logo/Chemon?unique=762a5b6" alt="Chemon" style="width: 380px; filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.3)); margin-bottom: 60px;">
+                <h1>CIERRE <span style="color: var(--cyan);">ENERO 2026</span></h1>
+                <hr style="width: 100px; border: 3px solid var(--pink); margin: 30px auto;">
+                <p style="font-size: 24px; letter-spacing: 6px; font-weight: 300; opacity: 0.9;">RESULTADOS & KICKOFF ESTRATÉGICO</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Ventas -->
+        <div class="slide bg-pattern">
+            <div class="deco-1"></div>
+            <h2 class="slide-title">Desempeño de Ventas</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div style="z-index: 2;">
+                        <p style="font-size: 20px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Cierre Enero</p>
+                        <h3 class="critical-pulse" style="font-size: 110px; line-height: 0.9;">$126,000</h3>
+                        <p style="margin-top: 30px; font-size: 22px; line-height: 1.6; color: #555;">
+                            Hemos superado el rendimiento de todo el Q4. Estamos a un paso de consolidar nuestra meta mensual de <strong style="color: var(--navy);">$130,000</strong>.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <div class="goal-line"><span class="goal-text">META: $130K</span></div>
+                        <div class="bar-wrap">
+                            <div class="bar" style="height: 27%;"></div> 
+                            <span class="bar-label">OCT</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <div class="bar" style="height: 59%;"></div> 
+                            <span class="bar-label">NOV</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <div class="bar" style="height: 13%;"></div> 
+                            <span class="bar-label">DIC</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <div class="bar current" style="height: 97%;"></div> 
+                            <span class="bar-label" style="color: var(--cyan);">ENE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Operaciones -->
+        <div class="slide bg-gray">
+            <h2 class="slide-title">Operaciones Odoo <i class="fa-solid fa-gears title-icon"></i></h2>
+            <div class="content-area">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div class="stat-box">
+                        <i class="fa-solid fa-code-branch" style="font-size: 30px; color: var(--cyan); margin-bottom: 15px;"></i>
+                        <h3>11</h3>
+                        <p style="font-weight: bold; font-size: 18px; color: #555;">Proyectos Activos</p>
+                    </div>
+                    <div class="stat-box" style="border-bottom: 5px solid var(--navy);">
+                        <i class="fa-solid fa-check-circle" style="font-size: 30px; color: var(--navy); margin-bottom: 15px;"></i>
+                        <h3>06</h3>
+                        <p style="font-weight: bold; font-size: 18px; color: #555;">Entregas Cerradas</p>
+                    </div>
+                    <div class="stat-box" style="border-bottom: 5px solid var(--pink);">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 30px; color: var(--pink); margin-bottom: 15px;"></i>
+                        <h3>02</h3>
+                        <p style="font-weight: bold; font-size: 18px; color: #555;">Churn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Título Marketing -->
+        <div class="slide bg-navy" style="text-align: center;">
+            <div class="deco-2" style="opacity: 0.15; right: 0; left: auto;"></div>
+            <div class="content-area">
+                <i class="fa-solid fa-bullhorn" style="font-size: 100px; color: var(--cyan); margin-bottom: 30px; animation: float 3s infinite ease-in-out;"></i>
+                <h2 style="font-size: 60px; color: var(--white); margin-bottom: 10px;">NUEVAS ESTRATEGIAS</h2>
+                <h3 style="letter-spacing: 5px; color: var(--cyan);">MARKETING & GROWTH</h3>
+            </div>
+        </div>
+
+        <!-- Slide 5: Marketing Mix -->
+        <div class="slide bg-pattern">
+            <h2 class="slide-title">Marketing Mix</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div class="card-modern">
+                        <i class="fa-brands fa-linkedin" style="color: #0077b5; font-size: 50px; margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--navy);">Outbound Directo</h3>
+                        <p style="margin-top: 15px; font-size: 18px; color: #555;">Estrategia agresiva en LinkedIn y correos segmentados.</p>
+                        <div style="margin-top: 25px; display: inline-block; padding: 10px 20px; background: rgba(233, 30, 99, 0.1); border-radius: 30px;">
+                            <p class="critical-pulse" style="margin: 0; font-size: 18px;">🔥 03 Leads Activos</p>
+                        </div>
+                    </div>
+                    <div class="card-modern">
+                        <i class="fa-solid fa-magnet" style="color: var(--cyan); font-size: 50px; margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--navy);">Inbound Meta</h3>
+                        <p style="margin-top: 15px; font-size: 18px; color: #555;">Pauta activa en FB/IG. ¡Ayuda compartiendo!</p>
+                        <div style="display: flex; gap: 20px; margin-top: 25px;">
+                            <i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 30px;"></i>
+                            <i class="fa-brands fa-instagram" style="color: #E4405F; font-size: 30px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Título Beneficios -->
+        <div class="slide bg-navy" style="text-align: center;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(56, 182, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(56, 182, 255, 0.1) 50%, rgba(56, 182, 255, 0.1) 75%, transparent 75%, transparent); background-size: 40px 40px;"></div>
+            <div class="content-area">
+                <h2 style="font-size: 70px; color: var(--white);">BIENESTAR CHEMON</h2>
+                <div style="width: 150px; height: 6px; background: var(--pink); margin: 30px auto; border-radius: 3px;"></div>
+                <h3 style="letter-spacing: 5px; color: var(--cyan);">BENEFICIOS 2026</h3>
+            </div>
+        </div>
+
+        <!-- Slide 7: Flex Day -->
+        <div class="slide bg-pattern">
+            <div class="deco-2"></div>
+            <h2 class="slide-title">Flex Day: Reglas 2026</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div class="card-modern" style="text-align: center;">
+                        <div style="background: rgba(56, 182, 255, 0.1); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i class="fa-solid fa-calendar-day" style="font-size: 40px; color: var(--cyan);"></i>
+                        </div>
+                        <h3 style="margin-bottom: 10px;">05 Días al Año</h3>
+                        <p style="font-size: 18px; color: #666;">Sin justificante médico.</p>
+                        <div style="margin-top: 20px;">
+                            <span class="badge badge-pink">NO ACUMULABLES</span>
+                        </div>
+                    </div>
+                    <div class="card-modern">
+                        <ul class="list-styled" style="margin: 0;">
+                            <li><i class="fa-solid fa-shield-halved"></i> <span>Máximo <strong>1 día por semana</strong>.</span></li>
+                            <li><i class="fa-solid fa-ban"></i> <span><strong>NO</strong> aplica tras feriados o vacaciones.</span></li>
+                            <li><i class="fa-solid fa-rotate"></i> <span>Reinicio cada 1 de enero.</span></li>
+                            <li><i class="fa-solid fa-comment-dots"></i> <span>Coordinación previa con tu líder.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Team Building Rules -->
+        <div class="slide bg-pattern">
+            <h2 class="slide-title">Team Building: El Beneficio</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div class="card-modern" style="background: var(--navy); color: white;">
+                        <i class="fa-solid fa-hand-holding-dollar" style="font-size: 60px; color: var(--cyan); margin-bottom: 20px;"></i>
+                        <h3 style="color: white; font-size: 40px; margin-bottom: 10px;">$500 MXN</h3>
+                        <p style="font-size: 20px; opacity: 0.9;">Mensuales por persona</p>
+                        <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 0;">
+                        <p style="font-size: 14px; opacity: 0.7;">*Excedentes cubiertos por empleados.</p>
+                    </div>
+                    <div class="card-modern">
+                        <h3 style="margin-bottom: 25px; color: var(--navy);">Reglas de Oro</h3>
+                        <ul class="list-styled">
+                            <li><i class="fa-solid fa-users-line"></i> <span><strong>Inclusión Total:</strong> Toda la oficina.</span></li>
+                            <li><i class="fa-solid fa-clock-rotate-left"></i> <span><strong>Frecuencia:</strong> Máx 1 vez/mes.</span></li>
+                            <li><i class="fa-solid fa-comments"></i> <span><strong>Pro-Convivencia:</strong> Interacción real.</span></li>
+                            <li style="margin-left: 35px; font-size: 16px; color: #888;">✅ Cenas, boliche <br> ❌ Cine (No hay charla)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Team Building Process -->
+        <div class="slide bg-gray">
+            <h2 class="slide-title">Proceso de Aprobación</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-left: 8px solid var(--pink);">
+                        <h3 style="font-size: 24px; color: var(--pink); margin-bottom: 20px;">1. Validar la Idea</h3>
+                        <p style="margin-bottom: 20px; font-size: 18px; color: #555;">Publicar propuesta (lugar, fecha, actividad) en:</p>
+                        <div style="background: var(--navy); color: white; padding: 15px 25px; border-radius: 12px; display: inline-flex; align-items: center; gap: 10px; font-weight: bold;">
+                            <i class="fa-brands fa-slack"></i> Canal Todo Chemon
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-left: 8px solid var(--cyan);">
+                        <h3 style="font-size: 24px; color: var(--navy); margin-bottom: 20px;">2. Gestión de Gastos</h3>
+                        <ul class="list-styled">
+                            <li><i class="fa-solid fa-credit-card"></i> <span>Pago con TDC personal.</span></li>
+                            <li><i class="fa-solid fa-file-invoice"></i> <span><strong>Factura obligatoria</strong> a Chemon.</span></li>
+                            <li><i class="fa-solid fa-money-bill-transfer"></i> <span>Reembolso en nómina.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Agenda Odoo -->
+        <div class="slide bg-pattern">
+            <h2 class="slide-title">Agenda Odoo 2026 <i class="fa-solid fa-calendar-check title-icon"></i></h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <!-- Event 1 -->
+                    <div class="event-card">
+                        <div class="event-header">
+                            <i class="fa-solid fa-glass-cheers" style="font-size: 30px; color: var(--cyan);"></i>
+                            <div>
+                                <span class="event-month">ABRIL 2026</span>
+                                <h3 style="font-size: 24px; color: var(--navy); margin: 0;">Odoo Partner Day</h3>
+                            </div>
+                        </div>
+                        <div class="event-body">
+                            <p style="font-size: 18px; line-height: 1.6; color: #555;">
+                                Networking exclusivo en las oficinas de Odoo. Conexión con otros partners y convivencia (drinks & share).
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Event 2 -->
+                    <div class="event-card" style="background: var(--navy); border: none;">
+                        <div class="event-header" style="background: rgba(255,255,255,0.1); border-bottom-color: rgba(255,255,255,0.2);">
+                            <i class="fa-solid fa-earth-americas" style="font-size: 30px; color: var(--pink);"></i>
+                            <div>
+                                <span class="event-month" style="color: var(--cyan);">SEPTIEMBRE 2026</span>
+                                <h3 style="font-size: 24px; color: white; margin: 0;">Odoo Experience</h3>
+                            </div>
+                        </div>
+                        <div class="event-body">
+                            <p style="font-size: 18px; line-height: 1.6; color: #ddd;">
+                                Nos vamos al <strong>Odoo Experience America</strong>. Innovación, conferencias y presencia global de Chemon.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: New Hire -->
+        <div class="slide bg-pattern">
+            <h2 class="slide-title">Crecimiento del Equipo</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div>
+                        <h3 style="color: var(--navy); margin-bottom: 20px; font-size: 40px; font-weight: 800;">Talento para Crecer</h3>
+                        <p style="font-size: 22px; line-height: 1.6; color: #555;">
+                            Sumamos una nueva pieza clave para fortalecer nuestra capacidad de consultoría y ejecución en los proyectos de este Q1.
+                        </p>
+                    </div>
+                    <div class="card-modern" style="text-align: center; border-top: 6px solid var(--pink);">
+                        <div style="width: 150px; height: 150px; background: #eee; border-radius: 50%; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                            <i class="fa-solid fa-user" style="font-size: 70px; color: #ccc;"></i>
+                        </div>
+                        <h3 style="color: var(--navy); margin-bottom: 10px;">Samantha</h3>
+                        <span class="badge badge-pink">Consultora Senior</span>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 18px;">
+                            <i class="fa-regular fa-calendar" style="color: var(--cyan); margin-right: 8px;"></i>
+                            Ingreso: <strong>15 de Febrero</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Cierre -->
+        <div class="slide bg-navy" style="text-align: center; align-items: center;">
+            <div class="deco-1" style="opacity: 0.2;"></div>
+            <div class="content-area">
+                <img src="https://chemon.lat/web/image/website/1/logo/Chemon?unique=762a5b6" alt="Chemon" style="width: 250px; filter: brightness(0) invert(1); margin-bottom: 40px;">
+                <h2 style="font-size: 60px; margin-bottom: 20px; color: white;">¿LISTOS PARA HACER <span style="color: var(--cyan);">HISTORIA</span>?</h2>
+                <div style="margin-top: 60px;">
+                    <span class="badge badge-pink" style="font-size: 20px; padding: 10px 30px;">#TeamChemon2026</span>
+                    <p style="margin-top: 20px; font-size: 18px; opacity: 0.7;">www.chemon.lat</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-controls">
+            <button class="btn-nav" onclick="prevSlide()" title="Anterior"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="btn-nav" onclick="nextSlide()" title="Siguiente"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        function handleResize() {
+            const canvas = document.getElementById('canvas');
+            const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+            canvas.style.transform = `scale(${scale * 0.95})`;
+            canvas.style.transformOrigin = 'center';
+        }
+
+        window.addEventListener('resize', handleResize);
+        window.onload = handleResize;
+    </script>
+</body>
+</html>
