@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemon - Cierre Enero 2025</title>
+    <title>Chemon - Cierre Enero 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* 1. SETUP DE MARCA CHEMON */
         :root {
             --navy: #2A2D64;
             --navy-dark: #1a1d4d;
@@ -31,7 +30,6 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        /* LIENZO 16:9 FIJO */
         .presentation-canvas {
             width: 1280px;
             height: 720px;
@@ -42,7 +40,6 @@
             box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
 
-        /* 2. SISTEMA DE NAVEGACIÓN */
         .slide {
             position: absolute;
             top: 0;
@@ -60,9 +57,8 @@
             animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* 3. ANIMACIONES PERSONALIZADAS */
         @keyframes slide-up {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -72,15 +68,9 @@
             100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--pink)); }
         }
 
-        .pulse {
-            display: inline-block;
-            animation: critical-pulse 2s infinite ease-in-out;
-            color: var(--pink);
-            font-weight: 800;
-        }
+        .pulse { display: inline-block; animation: critical-pulse 2s infinite ease-in-out; color: var(--pink); font-weight: 800; }
 
-        /* 4. TIPOGRAFÍA Y ESTILOS DE TÍTULOS */
-        h1, h2, h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 800; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 800; }
         
         .slide-title { 
             font-size: 42px; 
@@ -99,101 +89,79 @@
             border-radius: 4px;
         }
 
-        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; z-index: 2; position: relative; }
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; position: relative; }
         .bg-navy { background: var(--navy); color: var(--white); }
         .bg-gray { background-color: var(--gray); color: var(--navy); }
 
-        /* 5. DISEÑO DE GRÁFICA (FIXED GOAL LINE) */
+        /* SALES CHART */
         .sales-chart {
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
-            height: 380px;
+            height: 300px;
             width: 100%;
             border-bottom: 3px solid rgba(42, 45, 100, 0.2);
             position: relative;
         }
-        .bar-wrap { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            width: 15%; 
-            height: 100%; 
-            justify-content: flex-end; 
-            z-index: 1; /* Detrás de la línea de meta */
-        }
-        .bar { 
-            width: 80%; 
-            background: linear-gradient(to bottom, var(--navy), var(--navy-dark)); 
-            border-radius: 8px 8px 0 0; 
-            position: relative;
-        }
+        .bar-wrap { display: flex; flex-direction: column; align-items: center; width: 15%; height: 100%; justify-content: flex-end; z-index: 1; }
+        .bar { width: 80%; background: linear-gradient(to bottom, var(--navy), var(--navy-dark)); border-radius: 8px 8px 0 0; }
         .bar.current { background: linear-gradient(to bottom, var(--cyan), #2998db); }
-        .bar-label { margin-top: 15px; font-weight: 700; font-family: 'Montserrat'; font-size: 15px; color: var(--navy); }
+        .bar-label { margin-top: 15px; font-weight: 700; font-size: 14px; color: var(--navy); }
         
-        /* LA LÍNEA DE META SIEMPRE AL FRENTE */
         .goal-line {
             position: absolute;
             width: 100%;
             height: 0;
-            border-top: 3px dashed var(--pink);
-            bottom: 92%; /* Representa 130k proporcionalmente */
-            z-index: 100 !important; /* Forzada al frente de las barras */
+            border-top: 4px dashed var(--pink);
+            bottom: 92%; 
+            z-index: 100 !important; 
             pointer-events: none;
         }
-        .goal-text { 
-            position: absolute; right: 0; top: -35px; 
-            background: var(--pink); color: white; 
-            padding: 4px 12px; border-radius: 12px;
-            font-weight: bold; font-size: 13px;
+        .goal-text { position: absolute; right: 0; top: -35px; background: var(--pink); color: white; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 13px; }
+
+        /* CARDS */
+        .card { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; align-items: center; }
+        .stat-number { font-size: 60px; font-weight: 800; color: var(--navy); }
+        .badge { background: var(--pink); color: white; padding: 6px 15px; border-radius: 30px; font-size: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; }
+
+        /* GAUSS BELL CURVE STYLES */
+        .gauss-container {
+            width: 100%;
+            position: relative;
+            padding-top: 20px;
         }
-
-        /* 6. COMPONENTES VISUALES */
-        .card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.03);
-            text-align: center;
-        }
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: center; }
-
-        .stat-number { font-size: 90px; font-weight: 800; line-height: 1; color: var(--navy); margin-bottom: 10px; }
-        
-        .badge { background: var(--pink); color: white; padding: 6px 15px; border-radius: 30px; font-size: 14px; font-weight: bold; text-transform: uppercase; display: inline-block; }
-
-        .controls {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
+        .gauss-svg { width: 100%; height: 200px; }
+        .gauss-labels {
             display: flex;
-            gap: 15px;
-            z-index: 1000;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 0 10px;
         }
-        .btn-nav {
-            background: var(--navy);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.3s;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .gauss-label-item { text-align: center; flex: 1; }
+        .gauss-num { display: block; font-weight: 800; font-size: 20px; color: var(--navy); }
+        .gauss-desc { font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700; }
+        .expected-marker { color: var(--cyan) !important; }
+        .top-marker { color: var(--pink) !important; }
+
+        /* MANDAMIENTOS */
+        .mandamientos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+        .mandamiento-card { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--navy); }
+        .mandamiento-card h4 { font-size: 15px; margin-bottom: 8px; }
+        .mandamiento-card p { font-size: 14px; color: #555; text-transform: none; line-height: 1.4; }
+
+        /* NAVIGATION */
+        .controls { position: absolute; bottom: 30px; right: 40px; display: flex; gap: 15px; z-index: 1000; }
+        .btn-nav { background: var(--navy); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
         .btn-nav:hover { background: var(--pink); transform: scale(1.1); }
 
-        /* Estilos específicos para Flex Day / Team Building */
         .benefit-list { list-style: none; text-align: left; }
-        .benefit-list li { font-size: 19px; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; }
-        .benefit-list li i { color: var(--cyan); margin-top: 4px; }
+        .benefit-list li { font-size: 18px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
+        .benefit-list li i { color: var(--cyan); margin-top: 4px; font-size: 14px; }
 
-        .timeline { display: flex; justify-content: space-around; width: 100%; position: relative; margin-top: 50px; }
-        .timeline::after { content: ''; position: absolute; top: 35px; left: 0; right: 0; height: 4px; background: var(--gray); z-index: 1; }
-        .tm-item { position: relative; z-index: 2; text-align: center; width: 40%; }
-        .tm-dot { width: 30px; height: 30px; background: var(--cyan); border: 6px solid var(--white); border-radius: 50%; margin: 20px auto; box-shadow: 0 0 0 4px var(--cyan); }
+        .section-header { text-align: center; }
+        .section-header h2 { font-size: 70px; margin-bottom: 10px; }
+        .section-line { width: 150px; height: 6px; background: var(--pink); margin: 20px auto; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -201,246 +169,309 @@
     <div class="presentation-canvas" id="canvas">
         
         <!-- Slide 1: Portada -->
-        <div class="slide active bg-navy" style="background-image: linear-gradient(rgba(42, 45, 100, 0.85), rgba(42, 45, 100, 0.85)), url('http://googleusercontent.com/image_collection/image_retrieval/13460017054337177439'); background-size: cover;">
+        <div class="slide active bg-navy">
             <div class="content-area" style="text-align: center; align-items: center;">
-                <img src="https://chemon.lat/web/image/website/1/logo/Chemon?unique=762a5b6" alt="Chemon" style="width: 350px; filter: brightness(0) invert(1); margin-bottom: 50px;">
-                <h1 style="font-size: 70px;">Cierre <span style="color: var(--cyan);">Enero 2025</span></h1>
-                <hr style="width: 100px; border: 3px solid var(--pink); margin: 30px auto;">
-                <p style="font-size: 24px; letter-spacing: 6px; font-weight: 300;">PROGRESO & VISIÓN ESTRATÉGICA</p>
+                <h1 style="font-size: 80px; letter-spacing: -2px;">CIERRE ENERO</h1>
+                <h2 style="color: var(--cyan); font-size: 50px; margin-top: -10px;">PROGRESO 2026</h2>
+                <div class="section-line"></div>
+                <p style="font-size: 24px; letter-spacing: 8px; font-weight: 300; opacity: 0.8;">CULTURA DE RESULTADOS</p>
             </div>
         </div>
 
-        <!-- Slide 2: Desempeño de Ventas (Gráfica Corregida) -->
+        <!-- Slide 2: Ventas -->
         <div class="slide">
             <h2 class="slide-title">Desempeño de Ventas</h2>
             <div class="content-area">
                 <div class="two-column">
                     <div>
-                        <p style="font-size: 20px; color: #888; font-weight: 700; margin-bottom: 10px;">VENTAS ENERO</p>
-                        <h3 class="pulse" style="font-size: 100px; line-height: 0.9;">$126,000</h3>
-                        <p style="margin-top: 30px; font-size: 22px; line-height: 1.6; color: #555;">
-                            Hemos superado el rendimiento de todo el Q4. Estamos a solo <strong>$4k</strong> de consolidar nuestra meta mensual de <strong style="color: var(--navy);">$130,000</strong>.
+                        <p style="font-size: 18px; color: #888; font-weight: 700;">INGRESOS ENERO</p>
+                        <h3 class="pulse" style="font-size: 90px; line-height: 0.9;">$126,000</h3>
+                        <p style="margin-top: 20px; font-size: 20px; color: #555; text-transform: none;">
+                            Superamos el rendimiento del Q4. A solo <strong style="color: var(--navy);">$4k</strong> de la meta histórica mensual.
                         </p>
                     </div>
                     <div class="sales-chart">
                         <div class="goal-line"><span class="goal-text">META: $130K</span></div>
-                        <div class="bar-wrap">
-                            <div class="bar" style="height: 27%;"></div> <!-- Oct: 35k -->
-                            <span class="bar-label">OCT</span>
-                        </div>
-                        <div class="bar-wrap">
-                            <div class="bar" style="height: 59%;"></div> <!-- Nov: 77k -->
-                            <span class="bar-label">NOV</span>
-                        </div>
-                        <div class="bar-wrap">
-                            <div class="bar" style="height: 13%;"></div> <!-- Dic: 17k -->
-                            <span class="bar-label">DIC</span>
-                        </div>
-                        <div class="bar-wrap">
-                            <div class="bar current" style="height: 97%;"></div> <!-- Ene: 126k -->
-                            <span class="bar-label" style="color: var(--cyan);">ENE</span>
-                        </div>
+                        <div class="bar-wrap"><div class="bar" style="height: 27%;"></div><span class="bar-label">OCT</span></div>
+                        <div class="bar-wrap"><div class="bar" style="height: 59%;"></div><span class="bar-label">NOV</span></div>
+                        <div class="bar-wrap"><div class="bar" style="height: 13%;"></div><span class="bar-label">DIC</span></div>
+                        <div class="bar-wrap"><div class="bar current" style="height: 97%;"></div><span class="bar-label" style="color: var(--cyan);">ENE</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 3: Operaciones -->
+        <!-- Slide 3: Utilidad -->
         <div class="slide bg-gray">
-            <h2 class="slide-title">Operaciones Odoo</h2>
+            <h2 class="slide-title">Utilidad & Equilibrio</h2>
             <div class="content-area">
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                <div class="two-column">
                     <div class="card">
-                        <div class="stat-number">11</div>
-                        <p style="font-weight: 800; font-size: 18px;">Proyectos Activos</p>
+                        <h3 style="color: var(--navy); font-size: 22px; margin-bottom: 20px;">Balance Mensual</h3>
+                        <div style="display: flex; justify-content: space-between; font-size: 20px; margin-bottom: 10px;">
+                            <span>Ingresos:</span> <span style="color: #2ecc71; font-weight: bold;">$126k</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 20px; margin-bottom: 20px;">
+                            <span>Gastos:</span> <span style="color: var(--pink); font-weight: bold;">$110k</span>
+                        </div>
+                        <div class="badge" style="font-size: 14px; width: 100%; padding: 12px;">PUNTO DE EQUILIBRIO LOGRADO</div>
                     </div>
-                    <div class="card" style="border-bottom: 8px solid var(--navy);">
-                        <div class="stat-number">06</div>
-                        <p style="font-weight: 800; font-size: 18px;">Proyectos Cerrados</p>
-                    </div>
-                    <div class="card" style="border-bottom: 8px solid var(--pink);">
-                        <div class="stat-number" style="color: var(--pink);">02</div>
-                        <p style="font-weight: 800; font-size: 18px;">Churn</p>
+                    <div style="text-align: left;">
+                        <h3 style="color: var(--navy); margin-bottom: 15px;">¡Felicidades Equipo!</h3>
+                        <p style="font-size: 17px; color: #444; text-transform: none; line-height: 1.5;">
+                            Dejamos atrás las pérdidas. Para aumentar la utilidad:
+                            <br>• <strong>Ventas:</strong> Cerrar más volumen.
+                            <br>• <strong>Consultoría:</strong> Proyectos más complejos y eficientes.
+                            <br>• <strong>Dirección:</strong> Atraer nuevas oportunidades.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Estrategias Marketing -->
-        <div class="slide bg-navy">
-            <div class="content-area" style="text-align: center;">
-                <i class="fa-solid fa-bullhorn" style="font-size: 80px; color: var(--cyan); margin-bottom: 30px;"></i>
-                <h2 style="font-size: 60px;">Nuevas Estrategias</h2>
-                <hr style="width: 150px; border: 3px solid var(--pink); margin: 40px auto;">
-                <h3 style="color: var(--cyan); letter-spacing: 5px;">Marketing & Growth</h3>
+        <!-- Slide 4: Operaciones Odoo -->
+        <div class="slide">
+            <h2 class="slide-title">Operaciones & Eficiencia</h2>
+            <div class="content-area">
+                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px;">
+                    <div class="card" style="text-align: left; border-left: 10px solid var(--navy);">
+                        <h3 style="font-size: 16px; color: var(--navy);">Métrica de Churn</h3>
+                        <div style="display: flex; align-items: baseline; gap: 15px; margin: 10px 0;">
+                            <span class="stat-number">11%</span>
+                            <span style="color: #888; font-size: 13px;">Mercado ERP: 40%</span>
+                        </div>
+                        <p style="text-transform: none; font-size: 14px;">Estamos muy por debajo de la media global, pero el objetivo es reducirlo aún más mediante excelencia en el servicio.</p>
+                    </div>
+                    <div class="card" style="text-align: left; border-left: 10px solid var(--cyan);">
+                        <h3 style="font-size: 16px; color: var(--navy);">Horas Billable</h3>
+                        <div style="display: flex; align-items: baseline; gap: 15px; margin: 10px 0;">
+                            <span class="stat-number">47%</span>
+                            <span style="color: var(--cyan); font-weight: 800; font-size: 13px;">META: 80%</span>
+                        </div>
+                        <p style="text-transform: none; font-size: 14px;">Superamos el 28% de diciembre. La meta es la eficiencia total.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; display: flex; justify-content: space-around; background: var(--gray); padding: 15px; border-radius: 15px; font-weight: bold;">
+                    <div>11 Activos</div><div>06 Cerrados</div><div style="color: var(--pink);">02 Churn</div>
+                </div>
             </div>
         </div>
 
-        <!-- Slide 5: Canales Mix -->
+        <!-- Slide 5: Crecimiento & Appraisals (GAUSS BELL) -->
+        <div class="slide bg-gray">
+            <h2 class="slide-title">Crecimiento & Appraisals</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div style="text-align: left;">
+                        <h3 style="color: var(--pink); font-size: 20px;">Exigencia Exponencial</h3>
+                        <p style="font-size: 16px; margin: 15px 0; text-transform: none; color: #444; line-height: 1.5;">
+                            En Chemon, 1 año equivale a 5 afuera. Por eso instauramos <strong>Appraisals Anuales</strong> para evaluar desempeño y ajustar sueldos.
+                        </p>
+                        <ul class="benefit-list" style="font-size: 14px; text-transform: none;">
+                            <li><i class="fa-solid fa-user-check"></i> Evaluación del líder directo.</li>
+                            <li><i class="fa-solid fa-pen-to-square"></i> Documentación de objetivos.</li>
+                            <li><i class="fa-solid fa-message"></i> Formulario de opinión del colaborador.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="font-size: 14px; margin-bottom: 20px; color: var(--navy);">La Campana de Desempeño</h4>
+                        <div class="gauss-container">
+                            <!-- SVG Gauss Curve -->
+                            <svg class="gauss-svg" viewBox="0 0 400 100" preserveAspectRatio="none">
+                                <path d="M0,100 C100,100 150,0 200,0 C250,0 300,100 400,100" fill="rgba(56, 182, 255, 0.1)" stroke="var(--navy)" stroke-width="3"/>
+                                <line x1="200" y1="0" x2="200" y2="100" stroke="var(--cyan)" stroke-dasharray="4" stroke-width="2" />
+                            </svg>
+                            <div class="gauss-labels">
+                                <div class="gauss-label-item"><span class="gauss-num">1</span><span class="gauss-desc">Mal</span></div>
+                                <div class="gauss-label-item"><span class="gauss-num">2</span><span class="gauss-desc">Bajo</span></div>
+                                <div class="gauss-label-item"><span class="gauss-num expected-marker">3</span><span class="gauss-desc expected-marker">Esperado</span></div>
+                                <div class="gauss-label-item"><span class="gauss-num">4</span><span class="gauss-desc">Alto</span></div>
+                                <div class="gauss-label-item"><span class="gauss-num top-marker">5</span><span class="gauss-desc top-marker">Top</span></div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 35px; font-size: 12px; text-transform: none; color: #777; font-style: italic;">
+                            Tu sueldo se ajusta según tu posición en la curva. <br>Estar en el 3 es cumplir, el 5 es superar toda expectativa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Mandamientos Título -->
+        <div class="slide bg-navy">
+            <div class="content-area section-header">
+                <h2>Mandamientos</h2>
+                <div class="section-line"></div>
+                <h3 style="color: var(--cyan); letter-spacing: 5px;">ADN Chemon</h3>
+            </div>
+        </div>
+
+        <!-- Slide 7: Mandamientos Contenido -->
         <div class="slide">
-            <h2 class="slide-title">Marketing Mix</h2>
+            <h2 class="slide-title">Principios de Operación</h2>
+            <div class="content-area">
+                <div class="mandamientos-grid">
+                    <div class="mandamiento-card">
+                        <h4>Autonomía</h4>
+                        <p>Sé arriesgado. Toma decisiones. Si te equivocas aprendemos, lo importante es no detener el flujo.</p>
+                    </div>
+                    <div class="mandamiento-card">
+                        <h4>Simplicidad</h4>
+                        <p>No al exceso de procesos. Si no suma, bórralo. Mantenlo siempre simple y funcional.</p>
+                    </div>
+                    <div class="mandamiento-card">
+                        <h4>1 a 1 Directo</h4>
+                        <p>Habla con la fuente. Consultoría con consultor, ventas con vendedor. No saltes jerarquías sin motivo.</p>
+                    </div>
+                    <div class="mandamiento-card">
+                        <h4>Error vs Repetición</h4>
+                        <p>Equivocarse es parte de aprender. Repetir el mismo error es lo que debemos evitar.</p>
+                    </div>
+                    <div class="mandamiento-card" style="grid-column: span 2;">
+                        <h4>Feedback Constante</h4>
+                        <p>Da feedback a quien sea y apréndelo a recibir. La apertura total nos hace crecer más rápido.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Marketing Título -->
+        <div class="slide bg-navy">
+            <div class="content-area section-header">
+                <h2>Marketing</h2>
+                <div class="section-line"></div>
+                <h3 style="color: var(--cyan); letter-spacing: 5px;">Growth Strategy</h3>
+            </div>
+        </div>
+
+        <!-- Slide 9: Marketing Mix -->
+        <div class="slide">
+            <h2 class="slide-title">Estrategias Activas</h2>
             <div class="content-area">
                 <div class="two-column">
                     <div class="card" style="text-align: left; height: 100%;">
-                        <i class="fa-brands fa-linkedin" style="font-size: 40px; color: var(--navy); margin-bottom: 20px;"></i>
-                        <h3>Outbound Directo</h3>
-                        <p style="margin-top: 15px; font-size: 18px;">Estrategia agresiva en LinkedIn y correos segmentados. <br><br> <span class="badge">🔥 03 Leads Activos</span></p>
+                        <h3 style="color: var(--navy); margin-bottom: 10px;">Outbound</h3>
+                        <p style="text-transform: none; font-size: 16px;">LinkedIn + Correos Masivos segmentados. <br><br> <span class="badge">🔥 03 Leads Activos</span></p>
                     </div>
                     <div class="card" style="text-align: left; height: 100%; border-left: 10px solid var(--cyan);">
-                        <i class="fa-solid fa-magnet" style="font-size: 40px; color: var(--cyan); margin-bottom: 20px;"></i>
-                        <h3>Inbound Meta</h3>
-                        <p style="margin-top: 15px; font-size: 18px;">Impulso en redes FB/IG. <br><strong>¡Apoya compartiendo y reaccionando a las redes!</strong></p>
-                        <div style="margin-top: 20px; display: flex; gap: 20px; font-size: 25px;">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
+                        <h3 style="color: var(--cyan); margin-bottom: 10px;">Inbound</h3>
+                        <p style="text-transform: none; font-size: 16px;">Meta (FB/IG). <br><strong>¡Apoya compartiendo el contenido para ayudar al algoritmo!</strong></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 6: Bienestar Intro -->
+        <!-- Slide 10: Bienestar Título -->
         <div class="slide bg-navy">
-            <div class="content-area" style="text-align: center;">
-                <h2 style="font-size: 70px;">Bienestar Chemon</h2>
-                <div style="width: 200px; height: 6px; background: var(--pink); margin: 30px auto; border-radius: 3px;"></div>
-                <h3 style="letter-spacing: 10px; color: var(--cyan);">NUEVOS BENEFICIOS 2026</h3>
+            <div class="content-area section-header">
+                <h2>Beneficios</h2>
+                <div class="section-line"></div>
+                <h3 style="color: var(--cyan); letter-spacing: 5px;">Bienestar 2026</h3>
             </div>
         </div>
 
-        <!-- Slide 7: Flex Day -->
+        <!-- Slide 11: Flex Day -->
         <div class="slide">
-            <h2 class="slide-title">Flex Day: Reglas 2026</h2>
+            <h2 class="slide-title">Flex Day</h2>
             <div class="content-area">
                 <div class="two-column">
                     <div class="card">
                         <i class="fa-solid fa-calendar-day" style="font-size: 60px; color: var(--cyan); margin-bottom: 20px;"></i>
                         <h3>05 Días al Año</h3>
-                        <p style="margin-top: 20px; font-size: 18px;">Uso para trámites personales o descanso por burnout <strong>sin justificante</strong>.</p>
-                        <p style="margin-top: 10px;" class="badge">No Acumulables</p>
+                        <p style="margin-top: 10px; text-transform: none;">Para trámites o burnout sin justificante médico.</p>
                     </div>
-                    <div>
-                        <ul class="benefit-list">
-                            <li><i class="fa-solid fa-shield-halved"></i> <span>Máximo <strong>1 día por semana</strong>.</span></li>
-                            <li><i class="fa-solid fa-ban"></i> <span><strong>Prohibido</strong> después de feriados o vacaciones.</span></li>
-                            <li><i class="fa-solid fa-rotate"></i> <span>Reinicio automático cada 1 de enero.</span></li>
-                            <li><i class="fa-solid fa-user-check"></i> <span>Coordinación previa con líder de área.</span></li>
-                        </ul>
-                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="fa-solid fa-shield-halved"></i> Máximo 1 por semana.</li>
+                        <li><i class="fa-solid fa-ban"></i> No tras feriados o vacaciones.</li>
+                        <li><i class="fa-solid fa-rotate"></i> Reinicio cada 1 de enero.</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 8: Team Building Beneficio -->
+        <!-- Slide 12: Team Building -->
         <div class="slide">
-            <h2 class="slide-title">Team Building: El Beneficio</h2>
+            <h2 class="slide-title">Team Building</h2>
             <div class="content-area">
                 <div class="two-column">
                     <div class="card" style="background: var(--navy); color: white;">
-                        <i class="fa-solid fa-hand-holding-dollar" style="font-size: 60px; color: var(--cyan); margin-bottom: 20px;"></i>
-                        <h3 style="color: white; font-size: 40px; margin-bottom: 15px;">$500 MXN</h3>
-                        <p style="font-size: 20px; opacity: 0.9;">Mensuales por persona</p>
-                        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 25px 0;">
-                        <p style="font-size: 14px; opacity: 0.7;">*Diferencias cubiertas por el empleado.</p>
+                        <h3 style="color: white; font-size: 40px;">$500 MXN</h3>
+                        <p style="font-size: 18px; opacity: 0.9; text-transform: none;">Mensuales por persona.</p>
                     </div>
                     <div class="card" style="text-align: left;">
-                        <h3 style="color: var(--navy); margin-bottom: 20px;">Reglas de Oro</h3>
-                        <ul class="benefit-list" style="font-size: 17px;">
-                            <li><i class="fa-solid fa-users"></i> <span><strong>Inclusión Total:</strong> Toda la oficina invitada.</span></li>
-                            <li><i class="fa-solid fa-calendar-check"></i> <span><strong>Frecuencia:</strong> Máx. 1 evento por mes.</span></li>
-                            <li><i class="fa-solid fa-comments"></i> <span><strong>Pro-Convivencia:</strong> Debe permitir interactuar.</span></li>
-                            <li style="margin-left: 35px; color: #777;">✅ Cenas, juegos, boliche. <br> ❌ Cine (No permite diálogo).</li>
-                        </ul>
+                        <h3 style="color: var(--navy); font-size: 18px; margin-bottom: 10px;">Reglas Clave</h3>
+                        <p style="font-size: 14px; text-transform: none;">Inclusión total, convivencia real y factura obligatoria para reembolso en quincena.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 9: Proceso Team Building -->
+        <!-- Slide 13: Agenda Título -->
+        <div class="slide bg-navy">
+            <div class="content-area section-header">
+                <h2>Agenda</h2>
+                <div class="section-line"></div>
+                <h3 style="color: var(--cyan); letter-spacing: 5px;">Eventos Odoo 2026</h3>
+            </div>
+        </div>
+
+        <!-- Slide 14: Calendario -->
         <div class="slide bg-gray">
-            <h2 class="slide-title">Proceso de Reembolso</h2>
+            <h2 class="slide-title">Calendario</h2>
             <div class="content-area">
                 <div class="two-column">
                     <div class="card">
-                        <h3 style="color: var(--pink); font-size: 24px; margin-bottom: 20px;">1. Propuesta</h3>
-                        <p style="font-size: 17px; margin-bottom: 15px;">Publicar en canal <br><strong>#TodoChemon</strong></p>
-                        <p style="font-size: 14px; color: #888;">Lugar, fecha y actividad.</p>
-                        <div class="badge" style="margin-top: 15px;">Visto Bueno Dirección</div>
+                        <h3 style="color: var(--pink);">Abril</h3>
+                        <p style="text-transform: none;"><strong>Partner Day</strong><br>Networking en oficinas de Odoo.</p>
                     </div>
                     <div class="card">
-                        <h3 style="color: var(--navy); font-size: 24px; margin-bottom: 20px;">2. Ejecución</h3>
-                        <ul class="benefit-list" style="font-size: 15px;">
-                            <li><i class="fa-solid fa-credit-card"></i> Pago con TDC personal.</li>
-                            <li><i class="fa-solid fa-file-invoice"></i> <strong>Factura obligatoria</strong> (Chemon).</li>
-                            <li><i class="fa-solid fa-cloud-arrow-up"></i> Registro en portal de Viáticos.</li>
-                        </ul>
-                        <p style="margin-top: 15px; font-weight: bold; color: var(--navy);">Reembolso en quincena.</p>
+                        <h3 style="color: var(--navy);">Septiembre</h3>
+                        <p style="text-transform: none;"><strong>Odoo Experience</strong><br>Evento cumbre en América.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 10: Agenda 2026 -->
+        <!-- Slide 15: Talento Título -->
+        <div class="slide bg-navy">
+            <div class="content-area section-header">
+                <h2>Talento</h2>
+                <div class="section-line"></div>
+                <h3 style="color: var(--cyan); letter-spacing: 5px;">Nuevas Contrataciones</h3>
+            </div>
+        </div>
+
+        <!-- Slide 16: Samantha -->
         <div class="slide">
-            <h2 class="slide-title">Agenda Odoo 2026</h2>
-            <div class="content-area">
-                <div class="timeline">
-                    <div class="tm-item">
-                        <h3 style="color: var(--pink);">ABRIL</h3>
-                        <div class="tm-dot"></div>
-                        <p><strong>Partner Day</strong><br>Networking en oficinas de Odoo.</p>
-                    </div>
-                    <div class="tm-item">
-                        <h3 style="color: var(--navy);">SEPTIEMBRE</h3>
-                        <div class="tm-dot" style="background: var(--navy); box-shadow: 0 0 0 4px var(--navy);"></div>
-                        <p><strong>Odoo Experience</strong><br>Nos vamos al evento más grande en América.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 11: Samantha -->
-        <div class="slide">
-            <h2 class="slide-title">Nuevas Contrataciones</h2>
-            <div class="content-area">
-                <div class="two-column">
-                    <div style="text-align: center;">
-                        <div style="width: 250px; height: 250px; border-radius: 50%; overflow: hidden; margin: 0 auto; border: 8px solid var(--gray); box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-                            <img src="https://chemon.lat/web/image/res.users/6/image_1024" alt="Samantha" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2);">
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="font-size: 60px; color: var(--navy); margin-bottom: 10px;">Samantha</h3>
-                        <p class="badge" style="background: var(--navy); font-size: 18px; margin-bottom: 25px;">Consultora</p>
-                        <p style="font-size: 24px; color: #555;">Entra al equipo este <br><strong style="color: var(--pink);">15 de febrero</strong>.</p>
-                        <p style="margin-top: 20px; font-style: italic;">¡Bienvenida a la transformación!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 12: Opiniones -->
-        <div class="slide bg-gray">
-            <h2 class="slide-title">Tu Voz Cuenta</h2>
+            <h2 class="slide-title">Bienvenida</h2>
             <div class="content-area" style="text-align: center;">
-                <i class="fa-regular fa-comments" style="font-size: 120px; color: var(--navy); margin-bottom: 40px;"></i>
-                <h3 style="font-size: 40px; color: var(--navy);">Espacio Abierto</h3>
-                <p style="font-size: 22px; max-width: 800px; margin: 0 auto; color: #555;">Preguntas, sugerencias u opiniones sobre nuestras metas y el inicio de este gran año.</p>
+                <i class="fa-solid fa-user-plus" style="font-size: 80px; color: var(--navy); margin-bottom: 30px;"></i>
+                <h3 style="font-size: 50px; color: var(--navy);">Samantha</h3>
+                <div class="badge" style="background: var(--navy); margin-bottom: 20px;">Consultora</div>
+                <p style="font-size: 22px; color: #555; text-transform: none;">Inicia el <strong style="color: var(--pink);">15 de febrero</strong>.</p>
             </div>
         </div>
 
-        <!-- Slide 13: Cierre -->
-        <div class="slide bg-navy" style="background-image: linear-gradient(rgba(42, 45, 100, 0.9), rgba(42, 45, 100, 0.9)), url('http://googleusercontent.com/image_collection/image_retrieval/13164131628967745622'); background-size: cover;">
-            <div class="content-area" style="text-align: center; align-items: center;">
-                <img src="https://chemon.lat/web/image/website/1/logo/Chemon?unique=762a5b6" alt="Chemon" style="width: 200px; filter: brightness(0) invert(1); margin-bottom: 40px;">
-                <h2 style="font-size: 55px;">¡Hagamos un <span style="color: var(--cyan);">Febrero</span> Épico!</h2>
-                <div style="margin-top: 50px;">
-                    <span class="badge" style="padding: 10px 30px; font-size: 18px;">#TeamChemon2026</span>
-                </div>
+        <!-- Slide 17: AMA -->
+        <div class="slide bg-gray">
+            <h2 class="slide-title">AMA</h2>
+            <div class="content-area" style="text-align: center;">
+                <h3 style="font-size: 80px; color: var(--navy);">Ask Me Anything</h3>
+                <div class="section-line"></div>
+                <p style="font-size: 20px; color: #555; text-transform: none;">Espacio abierto para dudas u opiniones.</p>
             </div>
         </div>
 
-        <!-- CONTROLES -->
+        <!-- Slide 18: Cierre -->
+        <div class="slide bg-navy">
+            <div class="content-area" style="text-align: center;">
+                <h2 style="font-size: 60px;">¡VAMOS POR MÁS!</h2>
+                <div class="section-line"></div>
+                <span class="badge" style="padding: 10px 30px; font-size: 18px;">#TeamChemon2026</span>
+                <p style="margin-top: 40px; font-size: 16px; opacity: 0.6;">www.chemon.lat</p>
+            </div>
+        </div>
+
         <div class="controls">
             <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="btn-nav" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
@@ -456,15 +487,8 @@
             slides[index].classList.add('active');
         }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
@@ -479,7 +503,7 @@
         }
 
         window.addEventListener('resize', handleResize);
-        window.onload = handleResize;
+        window.onload = () => { handleResize(); showSlide(0); };
     </script>
 </body>
 </html>
