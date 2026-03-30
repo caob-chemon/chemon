@@ -92,7 +92,7 @@
         /* ─── HUD ─── */
         #hud { position:absolute;bottom:22px;left:96px;right:96px;display:flex;align-items:center;justify-content:space-between;z-index:200;pointer-events:none; }
         .hud-logo { display:flex;align-items:center;gap:8px; }
-        .hud-logo img { height:22px;opacity:.5; }
+        .hud-logo img { height:22px;opacity:.45;mix-blend-mode:multiply; }
         .hud-logo .hl-fallback { font-size:13px;font-weight:800;opacity:.4; }
         .hud-logo .hl-fallback span.c { color:var(--cyan); }
         .hud-logo .hl-fallback span.n { color:var(--navy); }
@@ -134,7 +134,9 @@
         .big-bg-num {
             position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
             font-size: 200px; font-weight: 900; letter-spacing: -8px;
-            color: rgba(42,45,100,.06); pointer-events: none; user-select: none; line-height: 1;
+            background: linear-gradient(135deg, rgba(56,182,255,.18) 0%, rgba(56,182,255,.06) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            pointer-events: none; user-select: none; line-height: 1;
         }
         .app-wrap { display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;max-width:520px; }
         .ac-chip { display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--muted); }
@@ -149,8 +151,9 @@
         ══════════════════════════════════ */
         #s3 { background: var(--lighter); }
         .s3-grid { display:grid;grid-template-columns:1fr 1fr;gap:60px;width:100%;align-items:center; }
-        .photo-frame { border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:var(--surface2);border:1px solid var(--border); }
-        .photo-frame img { width:100%;height:100%;object-fit:cover;display:block; }
+        .photo-frame { border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:var(--surface2);border:1px solid var(--border);position:relative; }
+        .photo-frame img { width:100%;height:100%;object-fit:cover;object-position:center top;display:block; }
+        .photo-frame .pf-fallback { position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#EEF2FF 0%,#E0E7FF 100%); }
         .metrics-row { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px; }
         .metric { background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:16px 12px;text-align:center; }
         .metric .mn { font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1; }
@@ -320,8 +323,9 @@
     <!-- ══ S1 — PORTADA ══ -->
     <div class="slide active" id="s1">
         <div class="cover-lockup a1">
-            <img src="Chemon_Principal_color_fondo_oscuro-removebg.png" alt="Chemon"
-                 onerror="this.outerHTML='<div style=\'font-size:36px;font-weight:900;color:white;\'><span style=\'color:#38B6FF;\'>chem</span><span style=\'color:#E91E63;\'>·</span><span style=\'color:#9BA3E8;\'>on</span></div>'">
+            <img src="https://raw.githubusercontent.com/caob-chemon/chemon/main/Chemon_Principal_color_fondo_oscuro.png" 
+                 alt="Chemon"
+                 onerror="this.src='Chemon_Principal_color_fondo_oscuro.png';this.onerror=function(){this.outerHTML='<div style=\'font-size:36px;font-weight:900;color:white;\'><span style=\'color:#38B6FF;\'>chem</span><span style=\'color:#E91E63;\'>·</span><span style=\'color:#9BA3E8;\'>on</span></div>'}">
             <div class="cover-sep"></div>
             <div class="partner-block">
                 <span class="pb-label">Partner Oficial</span>
@@ -368,7 +372,33 @@
             <div>
                 <div class="photo-frame">
                     <img src="Captura_de_pantalla_2026-03-29_a_la_s__7_20_05_p_m_.png" alt="Equipo Chemon"
-                         onerror="this.style.display='none';document.querySelector('#s3 .photo-frame').style.background='linear-gradient(135deg,#e8edf5,#d4dbe8)'">
+                         onerror="this.style.display='none'">
+                    <!-- Fallback: illustrated team visual -->
+                    <div class="pf-fallback">
+                        <svg width="280" height="200" viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background shapes -->
+                            <circle cx="140" cy="90" r="80" fill="rgba(56,182,255,0.08)"/>
+                            <!-- Person 1 (center) -->
+                            <circle cx="140" cy="58" r="22" fill="#38B6FF" opacity=".9"/>
+                            <path d="M100 130 Q140 108 180 130 L185 160 H95 Z" fill="#38B6FF" opacity=".9"/>
+                            <!-- Person 2 (left) -->
+                            <circle cx="82" cy="68" r="17" fill="#2A2D64" opacity=".7"/>
+                            <path d="M52 130 Q82 112 112 130 L115 155 H49 Z" fill="#2A2D64" opacity=".7"/>
+                            <!-- Person 3 (right) -->
+                            <circle cx="198" cy="68" r="17" fill="#E91E63" opacity=".7"/>
+                            <path d="M168 130 Q198 112 228 130 L231 155 H165 Z" fill="#E91E63" opacity=".7"/>
+                            <!-- Desk line -->
+                            <rect x="40" y="162" width="200" height="6" rx="3" fill="rgba(42,45,100,0.12)"/>
+                            <!-- Laptop icon -->
+                            <rect x="116" y="140" width="48" height="30" rx="4" fill="rgba(42,45,100,0.1)" stroke="rgba(42,45,100,0.2)" stroke-width="1.5"/>
+                            <rect x="120" y="143" width="40" height="22" rx="2" fill="white" opacity=".8"/>
+                            <!-- Screen content lines -->
+                            <rect x="124" y="148" width="24" height="2" rx="1" fill="var(--cyan)" opacity=".6"/>
+                            <rect x="124" y="153" width="16" height="2" rx="1" fill="rgba(42,45,100,.3)"/>
+                            <rect x="124" y="158" width="20" height="2" rx="1" fill="rgba(42,45,100,.2)"/>
+                        </svg>
+                        <div style="margin-top:10px;font-size:13px;font-weight:600;color:var(--navy);opacity:.5;letter-spacing:.5px;">Equipo Chemon</div>
+                    </div>
                 </div>
             </div>
             <div>
@@ -669,8 +699,10 @@
     <!-- ─── HUD ─── -->
     <div id="hud">
         <div class="hud-logo">
-            <img src="Chemon_Principal_color.png" alt="Chemon"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <!-- Try GitHub raw URL first, then local file, then text fallback -->
+            <img src="https://raw.githubusercontent.com/caob-chemon/chemon/main/Chemon_Principal_color_fondo_oscuro.png" 
+                 alt="Chemon"
+                 onerror="this.src='Chemon_Principal_color.png';this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex'}">
             <div class="hl-fallback" style="display:none;"><span class="c">chem</span><span class="n">on</span></div>
         </div>
         <div class="prog-wrap">
